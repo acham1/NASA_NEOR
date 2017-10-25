@@ -1,7 +1,14 @@
 class List extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      objects: props.objects
+    }
+  }
 
   render() {
-    return ([
+    console.log("rendering list")
+    return (
       <table class="table table-responsive table-striped" style={{display:"table"}}>
         <thead class="thead-inverse">
           <tr>
@@ -12,13 +19,19 @@ class List extends React.Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2017-10-20</td>
-            <td>No</td>
-            <td>15,267</td>
-            <td>250</td>
-          </tr>
+          {this.state.objects.map(x => {return <tr>
+              <td> {x.approach_date} </td> 
+              <td> {x.hazardous ? "Yes" : "No"} </td>
+              <td> {this.numberWithCommas(x.speed)} </td>
+              <td> {this.numberWithCommas(x.max_diameter)} </td>
+            </tr>
+          })}
         </tbody>
       </table>
-  ])}
+  )}
+
+  numberWithCommas = function (x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
 }

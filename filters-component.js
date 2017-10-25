@@ -1,6 +1,9 @@
 class Filters extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      objects: props.objects
+    }
   }
 
   render() {
@@ -11,7 +14,7 @@ class Filters extends React.Component {
         </div>
         <div class="card-body">
           Minimum speed: <code>{this.numberWithCommas(60000)}</code> mph
-          <input type="range" id="slider" step="1000" min="0" max="60000" style={{width: "100%"}}/> <br/>
+          <input type="range" id="slider" step="1000" min="0" max="60000" value="0" style={{width: "100%"}}/> <br/>
           <hr/>
           <div class="form-check">
             <label class="form-check-label">
@@ -19,7 +22,7 @@ class Filters extends React.Component {
             </label>
           </div>
           <hr/>
-          <code>87</code> of 87 objects shown.
+          <code>87</code> of {this.state.objects.length} objects shown.
         </div>
       </div>
   )}
