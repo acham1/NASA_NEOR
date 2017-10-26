@@ -7,7 +7,6 @@ class List extends React.Component {
   }
 
   render() {
-    console.log("rendering list")
     return (
       <table class="table table-responsive table-striped" style={{display:"table"}}>
         <thead class="thead-inverse">

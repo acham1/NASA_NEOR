@@ -30,7 +30,9 @@ class NeorApp extends React.Component {
           approach_date: day, 
           hazardous: object.is_potentially_hazardous_asteroid,
           speed: Math.round(parseFloat(object.close_approach_data[0].relative_velocity.miles_per_hour)),
-          max_diameter: Math.round(parseFloat(object.estimated_diameter.feet.estimated_diameter_max))
+          max_diameter: Math.round(parseFloat(object.estimated_diameter.feet.estimated_diameter_max)),
+          speed_ok: true,
+          hazard_ok: true
         });
       }
     }
@@ -42,10 +44,8 @@ class NeorApp extends React.Component {
         return 0;
     })
     this.setState({
-      objects: this.state.objects,
       loaded: true
     });
-    console.log(this.state)
   }
 
   getDateParam() {
@@ -68,7 +68,7 @@ class NeorApp extends React.Component {
       </div>,
       <div class="row mt-3">
         <div class="col-sm-8 col-md-6 mx-auto col-lg-4 order-lg-2 mt-3">
-          <Filters objects={this.state.objects}/>
+          <Filters objects={this.state.objects} update_list={() =>{this.setState();console.log("yes")}} />
         </div>
         <div class="col-lg-8 order-lg-1 mx-auto mt-3" style={{"text-align":"center"}}>
           <List objects={this.state.objects}/>
