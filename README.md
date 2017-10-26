@@ -13,3 +13,5 @@ Clone this repo and navigate to the its root directory. Enter the following comm
 ```
 python -m SimpleHTTPServer
 ```
+### Example
+<img src="https://user-images.githubusercontent.com/13604807/32037697-1d29390a-b9ec-11e7-985d-337328022ca8.png"/>
