@@ -80,17 +80,17 @@ class NeorApp extends React.Component {
 
   render() {
     return ([
-      <div class="row justify-content-sm-center">
-        <div class="col text-center mt-5">
+      <div className="row justify-content-sm-center">
+        <div className="col text-center mt-5">
           <h1>Near-Earth Object Radar</h1>
           <span> Week of {this.getDateParam()} </span>
         </div>
       </div>,
-      <div class="row mt-3">
-        <div class="col-sm-8 col-md-6 mx-auto col-lg-4 order-lg-2 mt-3">
+      <div className="row mt-3">
+        <div className="col-sm-8 col-md-6 mx-auto col-lg-4 order-lg-2 mt-3">
           <Filters objects={this.state.objects} update_list={this.updateList} />
         </div>
-        <div class="col-lg-8 order-lg-1 mx-auto mt-3" style={{"text-align":"center"}}>
+        <div className="col-lg-8 order-lg-1 mx-auto mt-3" style={{"text-align":"center"}}>
           <List objects={this.state.objects} hazardous_only={this.state.hazardous_only}/>
           <kbd> {this.loadedStatusMessage()} </kbd>
         </div>

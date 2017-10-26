@@ -39,17 +39,17 @@ class Filters extends React.Component {
 
   render() {
     return (
-      <div class="card">
-        <div class="card-header">
+      <div className="card">
+        <div className="card-header">
           Filter By:
         </div>
-        <div class="card-body">
+        <div className="card-body">
           Minimum speed: <code>{this.numberWithCommas(this.state.min_speed)}</code> mph
           <input onChange={this.handleSliderMoved} type="range" id="slider" step="1000" min="0" max="60000" value={this.state.min_speed} style={{width: "100%"}}/> <br/>
           <hr/>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input onChange={this.handleCheckboxToggled} type="checkbox" class="form-check-input" id="check" checked={this.state.hazardous_only}/> Hazardous objects only
+          <div className="form-check">
+            <label className="form-check-label">
+              <input onChange={this.handleCheckboxToggled} type="checkbox" className="form-check-input" id="check" checked={this.state.hazardous_only}/> Hazardous objects only
             </label>
           </div>
           <hr/>

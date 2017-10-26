@@ -2,8 +2,8 @@ class List extends React.Component {
 
   render() {
     return (
-      <table class="table table-responsive table-sm table-hover" style={{display:"table"}}>
-        <thead class="thead-inverse">
+      <table className="table table-responsive table-sm table-hover" style={{display:"table"}}>
+        <thead className="thead-inverse">
           <tr>
             <th>Approach Date</th>
             <th>Hazardous?</th>
@@ -30,7 +30,7 @@ class List extends React.Component {
     let cls = x.hazardous && !this.props.hazardous_only ? "table-danger" : "";
     // display only if object passes filters
     let style = {display: x.speed_ok && x.hazard_ok ? "table-row" : "none"};
-    return <tr class={cls} style={style}>
+    return <tr className={cls} style={style}>
               <td> {x.approach_date} </td> 
               <td> {x.hazardous ? "Yes" : "No"} </td>
               <td> {this.numberWithCommas(x.speed)} </td>
