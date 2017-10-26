@@ -10,18 +10,21 @@ class NeorApp extends React.Component {
     this.fetch_neor_objects()
   }
 
+  // setup fetch chain for updating state with neor objects
   fetch_neor_objects = () => {
     const key = "RrWh8UT2EHEqbsU26dlFOT2oo7nCnI3NcBgbRCIv";
     const neor_search_url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + this.getDateParam() + "&api_key=" + key;
     fetch(neor_search_url).then(this.parseResponse).then(this.loadNeorData);
   }
 
+  // convert fetch response to json
   parseResponse = (response) => {
     return response.json();
   }
 
+  // populate state's objects array with neor objects from fetched json
+  // then update state
   loadNeorData = (data) => {
-    let objects = []
     for (let day in data.near_earth_objects) {
       let arr = data.near_earth_objects[day];
       let len = arr.length;
@@ -37,19 +40,23 @@ class NeorApp extends React.Component {
         });
       }
     }
-    this.state.objects.sort((a,b) => {
-        let x = a.approach_date;
-        let y = b.approach_date;
-        if (x < y) {return -1;}
-        if (x > y) {return 1;}
-        return 0;
-    })
+    this.state.objects.sort(this.compareTwoObjectsByDate)
     this.setState({
       loaded: true,
       objects: this.state.objects
     });
   }
 
+  // compare objects by date, ascending
+  compareTwoObjectsByDate(a,b) {
+    let x = a.approach_date;
+    let y = b.approach_date;
+    if (x < y) {return -1;}
+    if (x > y) {return 1;}
+    return 0;
+  }
+
+  // format current date in yyyy-mm-dd format
   getDateParam() {
     // Based on: https://stackoverflow.com/a/4929629
     let today = new Date();
@@ -61,17 +68,22 @@ class NeorApp extends React.Component {
     return yyyy + "-" + mm + "-" + dd;
   }
 
+  // handler for children to request this parent component to update itself
   updateList = (x) => {
     this.setState(x);
   }
 
+  // return a message summarizing this component's loading state
+  loadedStatusMessage = () => {
+    return !this.state.loaded ? "Please wait. Fetching NEOR data from NASA ... " : "Fetched NEOR data!";
+  }
+
   render() {
-    console.log("app " + this.state.hazardous_only)
     return ([
       <div class="row justify-content-sm-center">
         <div class="col text-center mt-5">
           <h1>Near-Earth Object Radar</h1>
-          <p> Week of {this.getDateParam()} </p>
+          <span> Week of {this.getDateParam()} </span>
         </div>
       </div>,
       <div class="row mt-3">
@@ -80,7 +92,7 @@ class NeorApp extends React.Component {
         </div>
         <div class="col-lg-8 order-lg-1 mx-auto mt-3" style={{"text-align":"center"}}>
           <List objects={this.state.objects} hazardous_only={this.state.hazardous_only}/>
-          <kbd> {!this.state.loaded ? "Please wait. Fetching NEOR data from NASA ... " : "Fetched NEOR data!"} </kbd>
+          <kbd> {this.loadedStatusMessage()} </kbd>
         </div>
       </div>,
       <div>

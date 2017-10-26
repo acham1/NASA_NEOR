@@ -1,18 +1,20 @@
 class Filters extends React.Component {
-  
+
   constructor(props) {
     super(props)
     this.state = {
-      objects: props.objects,
       min_speed: 0,
       hazardous_only: false,
       update_list: props.update_list
     }
   }
 
+  // set the "speed_ok" field in each near-earth object and tell parent to update state
+  // i.e. 'speed_ok' := passes speed filter
   handleSliderMoved = () => {
+    // minimum passable speed
     let min = document.getElementById("slider").value;
-    let objects = this.state.objects;
+    let objects = this.props.objects;
     for (let i = 0; i < objects.length; i++) {
       objects[i].speed_ok = objects[i].speed >= min;
     }
@@ -20,9 +22,12 @@ class Filters extends React.Component {
     this.state.update_list({});
   }
 
+  // set the "hazard_ok" field in each near-earth object and tell parent to update state
+  // i.e. 'hazard_ok' := passes hazard filter, or hazard filter is not on
   handleCheckboxToggled = () => {
+    // check if objects should be limited to hazardous ones
     let limit = document.getElementById("check").checked;
-    let objects = this.state.objects;
+    let objects = this.props.objects;
     for (let i = 0; i < objects.length; i++) {
       objects[i].hazard_ok = objects[i].hazardous || !limit;
     }
@@ -46,17 +51,20 @@ class Filters extends React.Component {
             </label>
           </div>
           <hr/>
-          <code>{this.countValid()}</code> of {this.state.objects.length} objects shown.
+          <code>{this.countValid()}</code> of {this.props.objects.length} objects shown.
         </div>
       </div>
   )}
 
-  numberWithCommas = function (x) {
+  // return a formatted string, showing number with commas
+  // x: integer
+  numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  // count the number of valid objects (passing filters) in table
   countValid = () => {
-    let count = this.state.objects.filter((x) => {return x.speed_ok && x.hazard_ok}).length;
+    let count = this.props.objects.filter((x) => {return x.speed_ok && x.hazard_ok}).length;
     return count;
   }
 
