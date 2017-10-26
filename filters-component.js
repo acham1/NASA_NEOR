@@ -1,4 +1,5 @@
 class Filters extends React.Component {
+  
   constructor(props) {
     super(props)
     this.state = {
@@ -16,7 +17,7 @@ class Filters extends React.Component {
       objects[i].speed_ok = objects[i].speed >= min;
     }
     this.setState({min_speed: min});
-    this.state.update_list();
+    this.state.update_list({});
   }
 
   handleCheckboxToggled = () => {
@@ -25,8 +26,8 @@ class Filters extends React.Component {
     for (let i = 0; i < objects.length; i++) {
       objects[i].hazard_ok = objects[i].hazardous || !limit;
     }
-    this.setState({hazardous_only:!this.state.hazardous_only});
-    this.state.update_list();
+    this.setState({hazardous_only:limit});
+    this.state.update_list({hazardous_only: limit});
   }
 
   render() {

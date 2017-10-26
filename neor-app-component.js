@@ -4,7 +4,8 @@ class NeorApp extends React.Component {
     super(props)
     this.state = { 
       objects: [], 
-      loaded: false
+      loaded: false,
+      hazardous_only: false
     }
     this.fetch_neor_objects()
   }
@@ -44,7 +45,8 @@ class NeorApp extends React.Component {
         return 0;
     })
     this.setState({
-      loaded: true
+      loaded: true,
+      objects: this.state.objects
     });
   }
 
@@ -59,21 +61,30 @@ class NeorApp extends React.Component {
     return yyyy + "-" + mm + "-" + dd;
   }
 
+  updateList = (x) => {
+    this.setState(x);
+  }
+
   render() {
+    console.log("app " + this.state.hazardous_only)
     return ([
       <div class="row justify-content-sm-center">
         <div class="col text-center mt-5">
           <h1>Near-Earth Object Radar</h1>
+          <p> Week of {this.getDateParam()} </p>
         </div>
       </div>,
       <div class="row mt-3">
         <div class="col-sm-8 col-md-6 mx-auto col-lg-4 order-lg-2 mt-3">
-          <Filters objects={this.state.objects} update_list={() =>{this.setState();console.log("yes")}} />
+          <Filters objects={this.state.objects} update_list={this.updateList} />
         </div>
         <div class="col-lg-8 order-lg-1 mx-auto mt-3" style={{"text-align":"center"}}>
-          <List objects={this.state.objects}/>
+          <List objects={this.state.objects} hazardous_only={this.state.hazardous_only}/>
           <kbd> {!this.state.loaded ? "Please wait. Fetching NEOR data from NASA ... " : "Fetched NEOR data!"} </kbd>
         </div>
+      </div>,
+      <div>
+        <br/>
       </div>
     ]);
   }
