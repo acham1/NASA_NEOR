@@ -1,7 +1,9 @@
 # NASA Nearth-Earth Object Radar (NEOR) Report
 
+Live Site: [https://acham1.github.io/NASA_NEOR/](https://acham1.github.io/NASA_NEOR/)
+
 ### Description
-Using NASA's <a href="https://api.nasa.gov/api.html#NeoWS"> Near Earth Object Web Service </a> this React single-page application makes an interactive summary for the NEOs approaching in the next seven days. Users can filter by minimum object speed and hazard classification.
+Using NASA's <a href="https://api.nasa.gov/api.html#NeoWS"> Near Earth Object (NEO) Web Service </a> this React single-page application (SPA) makes an interactive summary for the NEOs approaching in the next seven days. Users can filter by minimum object speed and hazard classification.
 
 ### API Key
 ```
