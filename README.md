@@ -8,6 +8,7 @@ Using NASA's <a href="https://api.nasa.gov/api.html#NeoWS"> Near Earth Object (N
 
 
 ### API Key
+Use this or get your own for free from [NASA API](https://api.nasa.gov/index.html#apply-for-an-api-key)
 ```
 RrWh8UT2EHEqbsU26dlFOT2oo7nCnI3NcBgbRCIv
 ```
