@@ -87,7 +87,7 @@ class NeorApp extends React.Component {
         </div>
       </div>,
       <div className="row mt-3">
-        <div className="col-sm-8 col-md-6 mx-auto col-lg-4 order-lg-2 mt-3">
+        <div className="col-sm-8 col-md-8 mx-auto col-lg-4 order-lg-2 mt-3">
           <Filters objects={this.state.objects} update_list={this.updateList} />
         </div>
         <div className="col-lg-8 order-lg-1 mx-auto mt-3" style={{"text-align":"center"}}>
